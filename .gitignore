@@ -58,7 +58,19 @@ coverage
 dist/
 build/
 
-# SQLite database
-*.db
-*.sqlite
-*.sqlite3
+# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# OS generated files
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# MongoDB 로그 파일
+mongodb.log
