@@ -66,19 +66,6 @@ const connectDB = async () => {
             isConnected = false;
         });
 
-        // 매일 자정에 데이터베이스 초기화
-        cron.schedule('0 0 * * *', async () => {
-            try {
-                const collections = await mongoose.connection.db.collections();
-                for (const collection of collections) {
-                    await collection.deleteMany({});
-                }
-                console.log('데이터베이스 초기화 완료');
-            } catch (error) {
-                console.error('데이터베이스 초기화 중 오류 발생:', error);
-            }
-        });
-
     } catch (error) {
         console.error('MongoDB 연결 실패:', error);
         isConnected = false;
