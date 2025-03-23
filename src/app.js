@@ -29,17 +29,15 @@ app.get('/favicon.ico', (req, res) => {
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
 
-// 라우터 설정
-const requestsRouter = require('./routes/requests');
-app.use('/api/requests', requestsRouter);
-
-// 메인 페이지 라우트
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
-});
-
 // MongoDB 연결
+let isConnected = false;
+
 const connectDB = async () => {
+    if (isConnected) {
+        console.log('이미 MongoDB에 연결되어 있습니다.');
+        return;
+    }
+
     try {
         const mongoURI = process.env.MONGODB_URI;
         if (!mongoURI) {
@@ -50,6 +48,7 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
+        isConnected = true;
         console.log('MongoDB 연결 성공');
         
         // 매일 자정에 데이터베이스 초기화
@@ -66,11 +65,33 @@ const connectDB = async () => {
         });
     } catch (error) {
         console.error('MongoDB 연결 실패:', error);
-        process.exit(1);
+        isConnected = false;
+        throw error;
     }
 };
 
-connectDB();
+// 라우터 설정
+const requestsRouter = require('./routes/requests');
+app.use('/api/requests', requestsRouter);
+
+// 메인 페이지 라우트
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+// API 요청 처리 전에 DB 연결 확인
+app.use('/api/*', async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (error) {
+        console.error('API 요청 처리 중 DB 연결 실패:', error);
+        res.status(500).json({
+            error: '데이터베이스 연결 오류',
+            message: process.env.NODE_ENV === 'development' ? error.message : undefined
+        });
+    }
+});
 
 // 에러 핸들링 미들웨어
 app.use((err, req, res, next) => {
