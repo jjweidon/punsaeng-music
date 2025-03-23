@@ -57,3 +57,8 @@ coverage
 # Build output
 dist/
 build/
+
+# SQLite database
+*.db
+*.sqlite
+*.sqlite3

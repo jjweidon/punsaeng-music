@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
@@ -10,12 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-// MongoDB 연결
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/pungsaeng-music')
-  .then(() => console.log('MongoDB 연결 성공'))
-  .catch(err => console.error('MongoDB 연결 실패:', err));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // 라우트 설정
 const requestsRouter = require('./routes/requests');
