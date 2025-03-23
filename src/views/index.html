@@ -8,24 +8,27 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold text-center mb-8">풍생고등학교 음악 신청</h1>
+        <div class="relative mb-8">
+            <h1 class="text-3xl font-bold text-center">풍생고등학교 음악 신청</h1>
+            <h4 class="absolute bottom-0 right-0 text-gray-500">by. 코딩동아리</h4>
+        </div>
         
         <!-- 음악 신청 폼 -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 class="text-xl font-semibold mb-4">음악 신청하기</h2>
+            <h2 class="text-xl font-semibold mb-4">음악 신청</h2>
             <form id="musicRequestForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">제목</label>
+                    <label class="block text-sm font-medium text-gray-700">곡 제목</label>
                     <input type="text" id="title" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">가수</label>
+                    <label class="block text-sm font-medium text-gray-700">가수</label>
                     <input type="text" id="artist" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-500">신청 사유</label>
+                    <label class="block text-sm font-medium text-gray-700">신청 사유</label>
                     <textarea id="reason" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
                 </div>
@@ -38,7 +41,15 @@
 
         <!-- 신청 목록 -->
         <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-4">신청 목록</h2>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">신청 목록</h2>
+                <button id="sortToggle" class="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900">
+                    <span>시간순</span>
+                    <svg id="sortIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5"></path>
+                    </svg>
+                </button>
+            </div>
             <div id="requestList" class="space-y-4">
                 <!-- 여기에 신청 목록이 동적으로 추가됩니다 -->
             </div>
