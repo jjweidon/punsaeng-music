@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 신청 목록 불러오기
     async function loadRequests() {
         try {
-            const response = await fetch('/api/requests');
-            let requests = await response.json();
+            const response = await axios.get('/api/requests');
+            let requests = response.data;
             
             // 정렬 적용
             requests.sort((a, b) => {
@@ -72,15 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch('/api/requests', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
+            const response = await axios.post('/api/requests', formData);
+            
+            if (response.status === 201) {
                 form.reset();
                 loadRequests();
             } else {
