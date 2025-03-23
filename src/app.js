@@ -127,10 +127,13 @@ app.use((err, req, res, next) => {
     });
 });
 
-// 서버 시작
+// 서버 시작 (로컬 개발 환경에서만)
 const PORT = process.env.PORT || 3000;
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
         console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`);
     });
-} 
+}
+
+// Vercel 서버리스 환경을 위해 app 내보내기
+module.exports = app; 
