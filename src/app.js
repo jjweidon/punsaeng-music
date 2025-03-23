@@ -9,6 +9,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// favicon 라우트를 먼저 설정
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'favicon.ico'));
+});
+
+// 정적 파일 서빙
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // 라우트 설정
