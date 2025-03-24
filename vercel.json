@@ -20,10 +20,6 @@
     {
       "path": "/api/cron",
       "schedule": "0 21 * * *"
-    },
-    {
-      "path": "/api/cron-test",
-      "schedule": "0 * * * *"
     }
   ]
 } 
