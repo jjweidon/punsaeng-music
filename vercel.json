@@ -2,18 +2,24 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/app.js",
+      "src": "api/**/*.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "src/app.js"
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
       "dest": "src/app.js"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/requests/reset",
+      "schedule": "0 15 * * *"
     }
   ]
 } 
