@@ -28,4 +28,17 @@ router.post('/', async (req, res) => {
     }
 });
 
+// 데이터베이스 초기화
+router.post('/reset', async (req, res) => {
+    try {
+        const result = await Request.deleteMany({});
+        res.status(200).json({ 
+            message: '데이터베이스가 성공적으로 초기화되었습니다.',
+            deletedCount: result.deletedCount
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 module.exports = router; 

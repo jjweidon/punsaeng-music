@@ -5,6 +5,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortIcon = document.getElementById('sortIcon');
     let isAscending = true; // 기본값은 오름차순
 
+    // 로딩 상태 관리
+    function showLoading() {
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'loadingOverlay';
+        loadingOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+        loadingOverlay.innerHTML = `
+            <div class="bg-white p-6 rounded-lg shadow-xl">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+                <p class="mt-4 text-gray-700">처리 중...</p>
+            </div>
+        `;
+        document.body.appendChild(loadingOverlay);
+    }
+
+    function hideLoading() {
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay) {
+            loadingOverlay.remove();
+        }
+    }
+
     // 날짜 포맷팅 함수
     function formatDate(dateString) {
         const date = new Date(dateString);
@@ -83,6 +104,49 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('신청 중 오류가 발생했습니다:', error);
             alert('신청 중 오류가 발생했습니다. 다시 시도해주세요.');
+        }
+    });
+
+    // 데이터베이스 초기화 관련 코드
+    const hiddenResetButton = document.getElementById('hiddenResetButton');
+    const resetModal = document.getElementById('resetModal');
+    const resetConfirmation = document.getElementById('resetConfirmation');
+    const cancelReset = document.getElementById('cancelReset');
+    const confirmReset = document.getElementById('confirmReset');
+
+    // 숨겨진 버튼 클릭 시 모달 표시
+    hiddenResetButton.addEventListener('click', () => {
+        resetModal.classList.remove('hidden');
+        resetModal.classList.add('flex');
+    });
+
+    // 취소 버튼 클릭 시 모달 닫기
+    cancelReset.addEventListener('click', () => {
+        resetModal.classList.add('hidden');
+        resetModal.classList.remove('flex');
+        resetConfirmation.value = '';
+    });
+
+    // 초기화 확인 버튼 클릭 시
+    confirmReset.addEventListener('click', async () => {
+        if (resetConfirmation.value !== '초기화하겠습니다') {
+            alert('정확히 "초기화하겠습니다"를 입력해주세요.');
+            return;
+        }
+
+        try {
+            showLoading();
+            const response = await axios.post('/api/requests/reset');
+            alert(response.data.message);
+            loadRequests(); // 목록 새로고침
+        } catch (error) {
+            console.error('데이터베이스 초기화 실패:', error);
+            alert('데이터베이스 초기화에 실패했습니다.');
+        } finally {
+            hideLoading();
+            resetModal.classList.add('hidden');
+            resetModal.classList.remove('flex');
+            resetConfirmation.value = '';
         }
     });
 

@@ -38,15 +38,7 @@ const connectDB = async () => {
         console.log('MongoDB 연결 시도 중...');
         console.log('연결 URI:', mongoURI.replace(/\/\/[^:]+:[^@]+@/, '//<credentials>@')); // 보안을 위해 자격 증명 숨김
 
-        await mongoose.connect(mongoURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            serverSelectionTimeoutMS: 5000,
-            socketTimeoutMS: 45000,
-            connectTimeoutMS: 10000,
-            maxPoolSize: 10,
-            minPoolSize: 1,
-        });
+        await mongoose.connect(mongoURI);
 
         // 연결 성공 이벤트 리스너
         mongoose.connection.on('connected', () => {
