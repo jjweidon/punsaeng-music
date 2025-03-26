@@ -58,14 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
             
             requestList.innerHTML = requests.map((request, index) => `
                 <div class="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                    <div class="flex items-center justify-between mb-2">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <span class="text-sm font-medium text-gray-500">${isAscending ? index + 1 : requests.length - index}</span>
                             <h3 class="font-semibold">${request.title}</h3>
                             <span class="text-sm text-gray-500">-</span>
                             <span class="text-sm text-gray-500">${request.artist}</span>
                         </div>
-                        <span class="text-xs text-gray-400">${formatDate(request.createdAt)}</span>
+                        <span class="text-xs text-gray-400 mt-1 lg:mt-0">${formatDate(request.createdAt)}</span>
                     </div>
                     <p class="text-gray-600 text-sm">${request.reason}</p>
                 </div>
