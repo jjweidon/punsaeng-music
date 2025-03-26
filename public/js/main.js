@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 정렬 아이콘 업데이트
     function updateSortIcon() {
         sortIcon.style.transform = isAscending ? 'rotate(0deg)' : 'rotate(180deg)';
-        sortToggle.querySelector('span').textContent = isAscending ? '시간순 ↑' : '시간순 ↓';
+        sortToggle.querySelector('span').textContent = isAscending ? '정렬 ↑' : '정렬 ↓';
     }
 
     // 강조 효과 시작 함수
@@ -109,12 +109,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes highlightFade {
-                    0% { background-color: transparent; }
-                    50% { background-color: rgba(184, 192, 226, 0.5); }
-                    100% { background-color: transparent; }
+                    0% { 
+                        background-color: transparent;
+                        transform: scale(1);
+                    }
+                    30% { 
+                        background-color: rgba(231, 235, 255, 0.5);
+                        transform: scale(1.02);
+                    }
+                    70% { 
+                        background-color: rgba(231, 235, 255, 0.5);
+                        transform: scale(1.02);
+                    }
+                    100% { 
+                        background-color: transparent;
+                        transform: scale(1);
+                    }
                 }
                 .highlight-animation {
                     animation: highlightFade 2s ease-in-out;
+                    transform-origin: center;
                 }
             `;
             document.head.appendChild(style);
