@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortToggle = document.getElementById('sortToggle');
     const sortIcon = document.getElementById('sortIcon');
     let isAscending = true; // 기본값은 오름차순
+    let currentHighlightIndex = 0; // 현재 강조되는 인덱스
+    let highlightInterval; // 강조 효과를 위한 인터벌 ID
 
     // 로딩 상태 관리
     function showLoading() {
@@ -43,6 +45,35 @@ document.addEventListener('DOMContentLoaded', () => {
         sortToggle.querySelector('span').textContent = isAscending ? '시간순 ↑' : '시간순 ↓';
     }
 
+    // 강조 효과 시작 함수
+    function startHighlightAnimation(totalRequests) {
+        // 기존 인터벌 제거
+        if (highlightInterval) {
+            clearInterval(highlightInterval);
+        }
+
+        // 강조 효과 초기화
+        currentHighlightIndex = 0;
+
+        // 2초마다 다음 항목 강조
+        highlightInterval = setInterval(() => {
+            // 이전 강조 효과 제거
+            const prevHighlight = document.querySelector('.highlight-animation');
+            if (prevHighlight) {
+                prevHighlight.classList.remove('highlight-animation');
+            }
+
+            // 현재 항목 강조
+            const items = document.querySelectorAll('.request-item');
+            if (items.length > 0) {
+                items[currentHighlightIndex].classList.add('highlight-animation');
+                
+                // 다음 인덱스로 이동
+                currentHighlightIndex = (currentHighlightIndex + 1) % items.length;
+            }
+        }, 2000);
+    }
+
     // 신청 목록 불러오기
     async function loadRequests() {
         try {
@@ -57,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             requestList.innerHTML = requests.map((request, index) => `
-                <div class="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                <div class="request-item border rounded-lg p-4 hover:bg-gray-50 transition-all duration-300">
                     <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <span class="text-sm font-medium text-gray-500">${isAscending ? index + 1 : requests.length - index}</span>
@@ -70,6 +101,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="text-gray-600 text-sm">${request.reason}</p>
                 </div>
             `).join('');
+
+            // 애니메이션 시작
+            startHighlightAnimation(requests.length);
+
+            // 스타일 추가
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes highlightFade {
+                    0% { background-color: transparent; }
+                    50% { background-color: rgba(184, 192, 226, 0.5); }
+                    100% { background-color: transparent; }
+                }
+                .highlight-animation {
+                    animation: highlightFade 2s ease-in-out;
+                }
+            `;
+            document.head.appendChild(style);
+
         } catch (error) {
             console.error('신청 목록을 불러오는데 실패했습니다:', error);
         }
