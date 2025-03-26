@@ -110,19 +110,27 @@ document.addEventListener('DOMContentLoaded', () => {
             style.textContent = `
                 @keyframes highlightFade {
                     0% { 
-                        background-color: transparent;
+                        background: linear-gradient(30deg, #FFFFFF 0%, #FFD8EF 33%, #FFEBD9 66%, #FFFFFF 100%);
+                        background-size: 400% 400%;
+                        background-position: 0% 50%;
                         transform: scale(1);
                     }
                     30% { 
-                        background-color: rgba(231, 235, 255, 0.5);
+                        background: linear-gradient(30deg, #FFFFFF 0%, #FFD8EF 33%, #FFEBD9 66%, #FFFFFF 100%);
+                        background-size: 400% 400%;
+                        background-position: 50% 50%;
                         transform: scale(1.02);
                     }
-                    70% { 
-                        background-color: rgba(231, 235, 255, 0.5);
+                    40% { 
+                        background: linear-gradient(30deg, #FFFFFF 0%, #FFD8EF 33%, #FFEBD9 66%, #FFFFFF 100%);
+                        background-size: 400% 400%;
+                        background-position: 50% 50%;
                         transform: scale(1.02);
                     }
                     100% { 
-                        background-color: transparent;
+                        background: linear-gradient(30deg, #FFFFFF 0%, #FFD8EF 33%, #FFEBD9 66%, #FFFFFF 100%);
+                        background-size: 400% 400%;
+                        background-position: 100% 50%;
                         transform: scale(1);
                     }
                 }
