@@ -31,17 +31,17 @@
         .gradient-animate {
             background: linear-gradient(15deg, #A3EBFF 30%, #FFDEED 70%);
             background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            animation: gradient 20s ease infinite;
         }
         .gradient-button {
-            background: linear-gradient(15deg, #A1AAD2 20%, #FFCBE9 50%, #FFE1CD 80%, #A1AAD2 100%);
-            background-size: 500% 500%;
-            animation: gradient 15s ease infinite;
+            background: linear-gradient(30deg, #A1AAD2 0%, #FFCBE9 33%, #FFE1CD 66%, #A1AAD2 100%);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
         }
         .gradient-button:hover {
-            background: linear-gradient(15deg, #B8C0E2 20%, #FFD8EF 50%, #FFEBD9 80%, #B8C0E2 100%);
-            background-size: 500% 500%;
-            animation: gradient 15s ease infinite;
+            background: linear-gradient(30deg, #B8C0E2 0%, #FFD8EF 33%, #FFEBD9 66%, #B8C0E2 100%);
+            background-size: 400% 400%;
+            animation: gradient 10s ease infinite;
         }
     </style>
 </head>
@@ -114,18 +114,16 @@
             <!-- 신청 목록 -->
             <div class="lg:w-3/5">
                 <div class="bg-white rounded-lg shadow-md">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-xl font-semibold">신청 목록</h2>
-                            <button id="sortToggle" class="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900">
-                                <span>정렬</span>
-                                <svg id="sortIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5"></path>
-                                </svg>
-                            </button>
-                        </div>
+                    <div class="flex justify-between items-center px-6 pt-6">
+                        <h2 class="text-xl font-semibold">신청 목록</h2>
+                        <button id="sortToggle" class="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900">
+                            <span>정렬</span>
+                            <svg id="sortIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9M3 12h5"></path>
+                            </svg>
+                        </button>
                     </div>
-                    <div id="requestList" class="space-y-4 lg:max-h-[calc(100vh-300px)] lg:overflow-y-auto overflow-x-hidden overflow-visible px-6 pb-6">
+                    <div id="requestList" class="space-y-4 lg:max-h-[calc(100vh-300px)] lg:overflow-y-auto overflow-x-hidden overflow-visible px-6 py-4">
                         <!-- 여기에 신청 목록이 동적으로 추가됩니다 -->
                     </div>
                 </div>
