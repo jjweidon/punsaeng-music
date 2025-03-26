@@ -21,10 +21,11 @@
             }
         }
         body {
+            animation: gradient 15s linear infinite;
             background-image: url('/pungsaeng-music-bg-img.png');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
+            background-repeat: repeat-x;
             background-attachment: fixed;
         }
         .gradient-animate {
@@ -33,14 +34,13 @@
             animation: gradient 15s ease infinite;
         }
         .gradient-button {
-            background: linear-gradient(15deg, #A1AAD2 20%, #FFCBE9 50%, #FFE1CD 80%);
-            background-size: 400% 400%;
+            background: linear-gradient(15deg, #A1AAD2 20%, #FFCBE9 50%, #FFE1CD 80%, #A1AAD2 100%);
+            background-size: 500% 500%;
             animation: gradient 15s ease infinite;
-            transition: all 0.3s ease;
         }
         .gradient-button:hover {
-            background: linear-gradient(15deg, #B8C0E2 20%, #FFD8EF 50%, #FFEBD9 80%);
-            background-size: 400% 400%;
+            background: linear-gradient(15deg, #B8C0E2 20%, #FFD8EF 50%, #FFEBD9 80%, #B8C0E2 100%);
+            background-size: 500% 500%;
             animation: gradient 15s ease infinite;
         }
     </style>
