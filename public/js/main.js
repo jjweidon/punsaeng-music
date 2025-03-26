@@ -116,10 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     30% { 
                         background-color: rgba(231, 235, 255, 0.5);
                         transform: scale(1.02);
+                        overflow: visible;
                     }
                     70% { 
                         background-color: rgba(231, 235, 255, 0.5);
                         transform: scale(1.02);
+                        overflow: visible;
                     }
                     100% { 
                         background-color: transparent;
